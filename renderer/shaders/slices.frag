@@ -2,12 +2,13 @@
 precision mediump float;
 #endif
 
+uniform float frequency;
 varying vec2 vUv;
 varying vec2 vPosition;
 varying vec3 vWorldPosition;
 
 void main() {
-  float frequency = 20.0;
+  // float frequency = 40.0;
   float stripes = frequency * vUv.y;
   float rounded = floor(stripes);
 
