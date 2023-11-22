@@ -16,15 +16,37 @@
     "build:linux": "nextron build --linux"
   },
   "dependencies": {
+    "@react-three/drei": "^9.88.16",
+    "@react-three/fiber": "^8.15.11",
+    "@react-three/postprocessing": "^2.15.11",
     "electron-serve": "^1.1.0",
-    "electron-store": "^8.1.0"
+    "electron-store": "^8.1.0",
+    "glslify-loader": "^2.0.0",
+    "raw-loader": "^4.0.2",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "next": "^12.3.4",
     "nextron": "^8.5.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-glsl": "^0.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "prettier": {
+    "semi": false,
+    "overrides": [
+      {
+        "files": [
+          "*.frag",
+          "*.vert"
+        ],
+        "options": {
+          "parser": "glsl"
+        }
+      }
+    ]
   }
 }
