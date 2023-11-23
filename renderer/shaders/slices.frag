@@ -3,6 +3,7 @@ precision mediump float;
 #endif
 
 uniform float frequency;
+uniform float spacing;
 varying vec2 vUv;
 varying vec2 vPosition;
 varying vec3 vWorldPosition;
@@ -12,19 +13,19 @@ void main() {
   float stripes = frequency * vUv.y;
   float rounded = floor(stripes);
 
-  if(mod(rounded, 2.0) == 0.0) {
+  if(mod(rounded, spacing) == 0.0) {
     gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
   } else {
     discard;
   }
 
-  if(vWorldPosition.y == 1.0) {
-    discard;
-  }
+  // if(vWorldPosition.y == 1.0) {
+  //   discard;
+  // }
 
-  if(vWorldPosition.y == -1.0) {
-    discard;
-  }
+  // if(vWorldPosition.y == -1.0) {
+  //   discard;
+  // }
 
-  gl_FragColor = vec4(1.0, 1.0, 1.0, vWorldPosition.y + 1.0);
+  gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(vWorldPosition.y + 1.0, 0.0, 0.75));
 }
