@@ -7,6 +7,7 @@ import {
   Stats,
   Edges,
   useGLTF,
+  Text,
 } from "@react-three/drei"
 import fragmentShader from "../shaders/slices.frag"
 import vertexShader from "../shaders/slices.vert"
@@ -23,65 +24,69 @@ const MyShaderMaterial = shaderMaterial(
 )
 extend({ MyShaderMaterial })
 
-function Box(props) {
-  return (
-    <mesh {...props}>
-      <boxGeometry />
-      <myShaderMaterial
-        transparent={true}
-        side={THREE.DoubleSide}
-        frequency={40.0}
-        spacing={16.0}
-      />
-    </mesh>
-  )
-}
-
-function Building(props) {
-  const { nodes, materials } = useGLTF("/models/building1.glb")
-  return (
-    <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Cube.geometry}>
-        <myShaderMaterial
-          transparent={true}
-          side={THREE.DoubleSide}
-          frequency={250.0}
-          spacing={4.0}
-        />
-      </mesh>
-    </group>
-  )
-}
-
 function City(props) {
-  const { nodes } = useGLTF("/models/building-collection.glb")
+  const { nodes } = useGLTF("/models/city.glb")
+  console.log(nodes)
   return (
     <group {...props} dispose={null}>
       {nodes.Scene.children.map((child) => {
-        console.log(child)
-        return (
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={child.geometry}
-            position={child.position}
-            rotation={child.rotation}
-            scale={child.scale}
-          >
-            <myShaderMaterial
-              transparent={true}
-              side={THREE.DoubleSide}
-              frequency={Math.random() * 200}
-              spacing={4.0}
-            />
-          </mesh>
-        )
+        const { name } = child
+        switch (true) {
+          case name.includes("building"):
+            return (
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={child.geometry}
+                position={child.position}
+                rotation={child.rotation}
+                scale={child.scale}
+              >
+                <myShaderMaterial
+                  transparent={true}
+                  side={THREE.DoubleSide}
+                  frequency={Math.random() * 200}
+                  spacing={4.0}
+                />
+              </mesh>
+            )
+          case name.includes("road"):
+            return (
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={child.geometry}
+                position={child.position}
+                rotation={child.rotation}
+                scale={child.scale}
+              >
+                <meshBasicMaterial />
+              </mesh>
+            )
+          case name.includes("text"):
+            const formattedName = name.split("-")[1].replace("_", " ") // converts text-Korea_Town to Korea Town
+            return (
+              <Text
+                fontSize={0.25}
+                color="black"
+                // anchorX="center"
+                // anchorY="middle"
+                position={child.position}
+                rotation={child.rotation}
+              >
+                {formattedName}
+              </Text>
+            )
+            break
+          default:
+            break
+        }
       })}
     </group>
   )
 }
 
-useGLTF.preload("/models/building1.glb")
+useGLTF.preload("/models/city.glb")
 
 export default function Home() {
   return (
@@ -89,8 +94,6 @@ export default function Home() {
       <Canvas dpr={[1, 2]}>
         <ambientLight intensity={1} />
         <CameraControls />
-        {/* <Box position={[0, 0, 0]} scale={[2, 2, 2]} />
-        <Building position={[4, 0, 0]} scale={[1, 1, 1]} /> */}
         <City />
         <Stats />
       </Canvas>
