@@ -27,5 +27,6 @@ void main() {
   //   discard;
   // }
 
-  gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(vWorldPosition.y + 1.0, 0.0, 0.75));
+  // gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(vWorldPosition.y + 1.0, 0.0, 0.75));
+  gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(vPosition.y + 1.0, 0.0, 0.75));
 }

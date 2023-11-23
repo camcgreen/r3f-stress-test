@@ -9,20 +9,10 @@ import {
   useGLTF,
   Text,
 } from "@react-three/drei"
-import fragmentShader from "../shaders/slices.frag"
-import vertexShader from "../shaders/slices.vert"
+import { BuildingMaterial } from "../materials/building"
+import { RoadMaterial } from "../materials/road"
 import { getRandomInt } from "../../utils/helpers"
 import styles from "../styles/Home.module.css"
-
-const MyShaderMaterial = shaderMaterial(
-  {
-    frequency: null,
-    spacing: null,
-  },
-  vertexShader,
-  fragmentShader,
-)
-extend({ MyShaderMaterial })
 
 function City(props) {
   const { nodes } = useGLTF("/models/city.glb")
@@ -42,11 +32,12 @@ function City(props) {
                 rotation={child.rotation}
                 scale={child.scale}
               >
-                <myShaderMaterial
+                <buildingMaterial
                   transparent={true}
                   side={THREE.DoubleSide}
-                  frequency={Math.random() * 200}
-                  spacing={4.0}
+                  // frequency={Math.random() * 200}
+                  frequency={400}
+                  spacing={10.0}
                 />
               </mesh>
             )
@@ -60,7 +51,7 @@ function City(props) {
                 rotation={child.rotation}
                 scale={child.scale}
               >
-                <meshBasicMaterial />
+                <roadMaterial transparent={true} />
               </mesh>
             )
           case name.includes("text"):
@@ -68,7 +59,7 @@ function City(props) {
             return (
               <Text
                 fontSize={0.25}
-                color="black"
+                color="#717175"
                 // anchorX="center"
                 // anchorY="middle"
                 position={child.position}
