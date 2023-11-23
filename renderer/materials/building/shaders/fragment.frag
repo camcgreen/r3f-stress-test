@@ -8,7 +8,6 @@ varying vec2 vUv;
 varying vec2 vPosition;
 
 void main() {
-  // float stripes = frequency * vUv.y;
   float stripes = frequency * vPosition.y;
   float rounded = floor(stripes);
 
@@ -18,5 +17,5 @@ void main() {
     discard;
   }
 
-  gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(vPosition.y + 1.0, 0.0, 0.75));
+  gl_FragColor = vec4(0.9, 0.9, 0.95, clamp(pow(vPosition.y + 1.0, 2.0), 0.0, 0.75));
 }

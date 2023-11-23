@@ -13,6 +13,7 @@ import { BuildingMaterial } from "../materials/building/material"
 import { RoadMaterial } from "../materials/road/material"
 import { getRandomInt } from "../../utils/helpers"
 import styles from "../styles/Home.module.css"
+import { FONT_3D } from "../../utils/macros"
 
 function City(props) {
   const { nodes } = useGLTF("/models/city.glb")
@@ -35,8 +36,9 @@ function City(props) {
                 <buildingMaterial
                   transparent={true}
                   side={THREE.DoubleSide}
-                  frequency={10}
-                  spacing={5.0}
+                  frequency={Math.random() * 60}
+                  // spacing={getRandomInt(5, 10)}
+                  spacing={8}
                 />
               </mesh>
             )
@@ -57,6 +59,7 @@ function City(props) {
             const formattedName = name.split("-")[1].replace("_", " ")
             return (
               <Text
+                font={FONT_3D}
                 fontSize={0.25}
                 color="#717175"
                 position={child.position}

@@ -6,5 +6,5 @@ varying vec2 vUv;
 varying vec2 vPosition;
 
 void main() {
-  gl_FragColor = vec4(1.0, 1.0, 1.0, 0.025);
+  gl_FragColor = vec4(0.8, 0.8, 0.95, 0.025);
 }
