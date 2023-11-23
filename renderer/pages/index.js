@@ -35,8 +35,8 @@ function City(props) {
                 <buildingMaterial
                   transparent={true}
                   side={THREE.DoubleSide}
-                  frequency={400}
-                  spacing={10.0}
+                  frequency={10}
+                  spacing={5.0}
                 />
               </mesh>
             )

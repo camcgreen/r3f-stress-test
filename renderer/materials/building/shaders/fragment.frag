@@ -8,7 +8,8 @@ varying vec2 vUv;
 varying vec2 vPosition;
 
 void main() {
-  float stripes = frequency * vUv.y;
+  // float stripes = frequency * vUv.y;
+  float stripes = frequency * vPosition.y;
   float rounded = floor(stripes);
 
   if(mod(rounded, spacing) == 0.0) {
