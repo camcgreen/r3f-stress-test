@@ -36,9 +36,10 @@ function City(props) {
                 <buildingMaterial
                   transparent={true}
                   side={THREE.DoubleSide}
-                  frequency={Math.random() * 60}
+                  // frequency={Math.random() * 60}
                   // spacing={getRandomInt(5, 10)}
-                  spacing={8}
+                  frequency={20}
+                  spacing={5}
                 />
               </mesh>
             )
