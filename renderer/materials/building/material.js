@@ -1,7 +1,7 @@
 import { extend } from "@react-three/fiber"
 import { shaderMaterial } from "@react-three/drei"
-import fragmentShader from "../shaders/building/fragment.frag"
-import vertexShader from "../shaders/building/vertex.vert"
+import fragmentShader from "./shaders/fragment.frag"
+import vertexShader from "./shaders/vertex.vert"
 
 export const BuildingMaterial = shaderMaterial(
   {

@@ -9,8 +9,8 @@ import {
   useGLTF,
   Text,
 } from "@react-three/drei"
-import { BuildingMaterial } from "../materials/building"
-import { RoadMaterial } from "../materials/road"
+import { BuildingMaterial } from "../materials/building/material"
+import { RoadMaterial } from "../materials/road/material"
 import { getRandomInt } from "../../utils/helpers"
 import styles from "../styles/Home.module.css"
 
@@ -35,7 +35,6 @@ function City(props) {
                 <buildingMaterial
                   transparent={true}
                   side={THREE.DoubleSide}
-                  // frequency={Math.random() * 200}
                   frequency={400}
                   spacing={10.0}
                 />
@@ -55,20 +54,17 @@ function City(props) {
               </mesh>
             )
           case name.includes("text"):
-            const formattedName = name.split("-")[1].replace("_", " ") // converts text-Korea_Town to Korea Town
+            const formattedName = name.split("-")[1].replace("_", " ")
             return (
               <Text
                 fontSize={0.25}
                 color="#717175"
-                // anchorX="center"
-                // anchorY="middle"
                 position={child.position}
                 rotation={child.rotation}
               >
                 {formattedName}
               </Text>
             )
-            break
           default:
             break
         }
@@ -82,7 +78,7 @@ useGLTF.preload("/models/city.glb")
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Canvas dpr={[1, 2]}>
+      <Canvas dpr={[1, 2]} camera={{ position: [-5, 4, 4] }}>
         <ambientLight intensity={1} />
         <CameraControls />
         <City />

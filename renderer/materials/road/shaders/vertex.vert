@@ -1,6 +1,6 @@
 precision mediump float;
 
-varying vec2 vUv; // Pass the uv coords to the fragment shader
+varying vec2 vUv;
 varying vec2 vPosition;
 
 void main() {
